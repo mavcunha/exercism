@@ -1,16 +1,34 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class PangramChecker {
 
-    private final String atLeastOnceChars = "abcdefghijklmnopqrstuvxywz";
+    private List<Character> atLeastOnceChars;
 
-    public boolean isPangram(String input) {
-        final String lowerCaseInput = input.toLowerCase(Locale.ENGLISH);
-
-        return atLeastOnceChars.chars().noneMatch(c -> isCharMissing((char) c, lowerCaseInput));
+    public PangramChecker() {
+        atLeastOnceChars = "abcdefghijklmnopqrstuvxywz".chars()
+                .mapToObj(c -> ((char) c))
+                .collect(Collectors.toList());
     }
 
-    private boolean isCharMissing(char c, String input) {
-        return input.indexOf(c) == -1;
+    public boolean isPangram(String input) {
+        final List<Character> atLeastOnceChars = newListCopy(this.atLeastOnceChars);
+
+        final char[] inputChars = input.toLowerCase(Locale.ENGLISH).toCharArray();
+
+        return remainingMandatoryChars(atLeastOnceChars, inputChars) == 0;
+    }
+
+    private int remainingMandatoryChars(List<Character> atLeastOnce, char[] inputChars) {
+        for (int i = 0; i < inputChars.length && atLeastOnce.size() != 0; i++) {
+            atLeastOnce.remove(Character.valueOf(inputChars[i]));
+        }
+        return atLeastOnce.size();
+    }
+
+    private List<Character> newListCopy(List<Character> orig) {
+        return new ArrayList<>(orig);
     }
 }

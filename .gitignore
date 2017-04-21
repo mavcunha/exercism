@@ -1,4 +1,5 @@
 .idea/libraries/
+.idea/workspace.xml
 gradle.xml
 .DS_Store
 gradlew
