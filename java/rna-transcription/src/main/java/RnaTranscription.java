@@ -14,12 +14,9 @@ public class RnaTranscription {
     }
 
     public String ofDna(String dna) {
-        return dna.isEmpty() ? "" : transcribe(dna);
-    }
-
-    private String transcribe(String dna) {
         return dna.chars()
                 .mapToObj(a -> this.transcriptionMap.get((char) a))
                 .collect(Collectors.joining());
     }
+
 }
