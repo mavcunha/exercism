@@ -14,14 +14,13 @@ public class PangramChecker {
     }
 
     public boolean isPangram(String input) {
-        final List<Character> atLeastOnceChars = newListCopy(this.atLeastOnceChars);
-
         final char[] inputChars = input.toLowerCase(Locale.ENGLISH).toCharArray();
 
-        return remainingMandatoryChars(atLeastOnceChars, inputChars) == 0;
+        return remainingMandatoryChars(inputChars) == 0;
     }
 
-    private int remainingMandatoryChars(List<Character> atLeastOnce, char[] inputChars) {
+    private int remainingMandatoryChars(char[] inputChars) {
+        List<Character> atLeastOnce = newListCopy(this.atLeastOnceChars);
         for (int i = 0; i < inputChars.length && atLeastOnce.size() != 0; i++) {
             atLeastOnce.remove(Character.valueOf(inputChars[i]));
         }

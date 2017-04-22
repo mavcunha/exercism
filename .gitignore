@@ -1,5 +1,3 @@
-java/hello-world/.idea/workspace.xml
-.idea/libraries/
 gradle.xml
 .DS_Store
 gradlew
@@ -7,4 +5,4 @@ gradlew.bat
 gradle-wrapper.jar
 build/
 .gradle
-
+.idea/
