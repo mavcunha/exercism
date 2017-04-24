@@ -1,7 +1,11 @@
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Acronym {
+
+    public static final Pattern WORD_SPLIT = Pattern.compile("(?:\\s|-)");
+    public static final Pattern CAMEL_CASE_SPLIT = Pattern.compile("(?=[A-Z][a-z]+)");
+
     private final String phrase;
 
     public Acronym(String phrase) {
@@ -9,14 +13,9 @@ public class Acronym {
     }
 
     public String get() {
-        String[] words = phrase.split("(?:\\s|-)");
-
-        return Stream.of(words)
-                .map(w -> w.replaceAll("^([A-Z])[A-Z].*(?!:)", "$1"))
-                .map(w -> Character.toUpperCase(w.charAt(0)) + w.substring(1))
-                .collect(Collectors.joining()).chars()
-                .filter(Character::isUpperCase)
-                .mapToObj(c -> Character.toString((char) c))
+        return WORD_SPLIT.splitAsStream(phrase)
+                .flatMap(CAMEL_CASE_SPLIT::splitAsStream)
+                .map(w -> w.substring(0, 1).toUpperCase())
                 .collect(Collectors.joining());
     }
 }
