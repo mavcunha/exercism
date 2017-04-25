@@ -1,25 +1,20 @@
-import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import static java.util.stream.Collectors.collectingAndThen;
+import java.util.TreeMap;
 
 public class RaindropConverter {
 
-    private final Map<Integer,String> sounds = new HashMap<Integer, String>(){{
+    private final Map<Integer,String> sounds = new TreeMap<Integer, String>(){{
         put(3, "Pling");
         put(5, "Plang");
         put(7, "Plong");
     }};
 
     public String convert(int number) {
-        return IntStream.rangeClosed(1, number)
-                .filter(i -> number % i == 0).boxed()
-                .map(i -> sounds.getOrDefault(i, ""))
-                .collect(collectingAndThen(
-                        Collectors.joining(),
-                        s -> s.isEmpty() ? String.valueOf(number) : s));
+        return sounds.keySet().stream()
+                .filter(i -> number % i == 0)
+                .map(sounds::get)
+                .reduce(String::concat)
+                .orElse(String.valueOf(number));
     }
 
 }
