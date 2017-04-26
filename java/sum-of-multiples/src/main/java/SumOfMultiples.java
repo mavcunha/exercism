@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class SumOfMultiples {
 
@@ -6,39 +7,16 @@ public class SumOfMultiples {
     private final int[] multiples;
 
     public SumOfMultiples(int number, int[] multiples) {
-        this.number = --number; // open interval
+        this.number = number;
         this.multiples = multiples;
     }
 
     public int getSum() {
-        if (multiples.length == 0) {
-            return 0;
-        }
-
-        int lcm = lcm(multiples);
-        int sub = sumMultiplesOf(number, lcm);
-
-        if(lcm == 1) {
-            sub = 0;
-        }
-
-        int sum = Arrays.stream(multiples)
-                .map(n -> sumMultiplesOf(number, n))
-                .sum();
-
-        return sum - sub;
+        return IntStream.range(1, number)
+                .filter(this::multipleOfAny).sum();
     }
 
-    private int lcm(int[] numbers) {
-        return Arrays.stream(numbers).reduce(1, (k, j) -> (k * j) / gcd(k, j));
-    }
-
-    private int gcd(int a, int b) {
-        return b == 0 ? a : gcd(b, a % b);
-    }
-
-    private int sumMultiplesOf(int number, int multiple) {
-        int n = Math.floorDiv(number, multiple);
-        return multiple * (n * (n + 1)) / 2;
+    private boolean multipleOfAny(int i) {
+        return Arrays.stream(multiples).anyMatch(m -> i % m == 0);
     }
 }
