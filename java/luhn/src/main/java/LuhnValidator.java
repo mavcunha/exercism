@@ -17,9 +17,7 @@ public class LuhnValidator {
         int[] digits = Arrays.copyOf(chars, chars.length);
         int i = digits.length - 2;
         do {
-            int r = (digits[i] * 2);
-            if (r > 9) r -= 9;
-            digits[i] = r;
+            digits[i] = (digits[i] * 2) - (digits[i] / 5) * 9;
             i -= 2;
         } while (i >= 0);
         return digits;
