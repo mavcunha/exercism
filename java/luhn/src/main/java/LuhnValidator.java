@@ -1,29 +1,37 @@
-import java.util.Arrays;
+import java.util.function.IntSupplier;
+import java.util.stream.IntStream;
 
 import static java.util.Arrays.stream;
 
 public class LuhnValidator {
-    public boolean isValid(String number) {
-        if (!isInputValid(number)) {
-            return false;
-        }
-        int[] digits = extractDigits(number);
-        int[] doubledDigits = doubleEveryOtherDigit(digits);
 
-        return stream(doubledDigits).sum() % 10 == 0;
+    public boolean isValid(String number) {
+        return isInputValid(number) && checkSumIsValid(number);
     }
 
-    private int[] doubleEveryOtherDigit(int[] chars) {
-        int[] digits = Arrays.copyOf(chars, chars.length);
-        int i = digits.length - 2;
-        do {
-            digits[i] = (digits[i] * 2) - (digits[i] / 5) * 9;
-            i -= 2;
-        } while (i >= 0);
+    private boolean checkSumIsValid(String number) {
+        return stream(doubleEveryOtherDigit(number)).sum() % 10 == 0;
+    }
+
+    private int[] doubleEveryOtherDigit(String number) {
+        final int[] digits = digitsFrom(number);
+        IntStream.generate(reverseEveryOther(digits.length))
+                .limit(digits.length/2)
+                .forEach(i -> digits[i] = (digits[i] * 2) - (digits[i] / 5) * 9);
         return digits;
     }
 
-    private int[] extractDigits(String s) {
+    private IntSupplier reverseEveryOther(final int length) {
+        return new IntSupplier() {
+            int i = length;
+            @Override
+            public int getAsInt() {
+                return i-=2;
+            }
+        };
+    }
+
+    private int[] digitsFrom(String s) {
         return s.replaceAll("\\D", "")
                 .chars().boxed()
                 .mapToInt(Character::getNumericValue).toArray();
