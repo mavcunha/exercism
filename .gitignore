@@ -4,5 +4,6 @@ gradlew
 gradlew.bat
 gradle-wrapper.jar
 build/
+target/
 .gradle
 .idea/
