@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -9,19 +7,19 @@ public class Matrix {
     private List<List<Integer>> matrix = new ArrayList<>();
 
     public Matrix(String matrixAsString) {
-        linesFrom(matrixAsString)
+        streamOf(matrixAsString, "\n")
                 .collect(Collectors.toList())
                 .forEach(line -> matrix.add(columnsFrom(line)));
     }
 
-    private Stream<String> linesFrom(String matrix) {
-        return Arrays.stream(matrix.split("\n"));
-    }
-
     private List<Integer> columnsFrom(String line) {
-        return Arrays.stream(line.split("\\s+"))
+        return streamOf(line, "\\s+")
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
+    }
+
+    private Stream<String> streamOf(String str, String regex) {
+        return Arrays.stream(str.split(regex));
     }
 
     public int getRowsCount() {
@@ -33,17 +31,10 @@ public class Matrix {
     }
 
     public int[] getRow(int i) {
-        return matrix.get(i)
-                .stream()
-                .mapToInt(Integer::intValue).toArray();
+        return matrix.get(i).stream().mapToInt(Integer::intValue).toArray();
     }
 
     public int[] getColumn(int i) {
-        return matrix.stream()
-                .map(l -> l.get(i))
-                .collect(Collectors.toList())
-                .stream()
-                .mapToInt(Integer::intValue)
-                .toArray();
+        return matrix.stream().mapToInt(l -> l.get(i)).toArray();
     }
 }
