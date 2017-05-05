@@ -28,7 +28,7 @@ public class LargestSeriesProductCalculator {
                 .mapToLong(i ->
                         stream(copyOfRange(digits, i, i + w))
                         .reduce((a, b) -> a * b).orElse(1))
-                .sorted().max().orElse(0);
+                .max().orElse(0);
     }
 
     private void ensure(boolean expected, final String message) {
