@@ -1,20 +1,15 @@
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 final class Flattener {
 
     public List<Object> flatten(List<Object> list) {
-        return flatList(new ArrayList<>(), list);
+        return flatList(list).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
-    private List<Object> flatList(List<Object> flat, List<Object> filler) {
-        for (Object o : filler) {
-            if (o instanceof List) {
-                flatList(flat, (List) o);
-            } else if(o != null) {
-                flat.add(o);
-            }
-        }
-        return flat;
+    private Stream<Object> flatList(Object f) {
+        return f instanceof List ? List.class.cast(f).stream().flatMap(this::flatList) : Stream.of(f);
     }
 }
