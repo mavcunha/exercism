@@ -7,7 +7,7 @@ public class PhoneNumber {
         this.phone = phone.replaceAll("(?:\\D)", "");
 
         conformsTo(this.phone.matches("^\\d{10,11}$"), "Number must be 10 or 11 digits");
-        conformsTo(this.phone.matches("(?:\\d{10}|1\\d{10})"), "Can only have 11 digits if number starts with '1'");
+        conformsTo(this.phone.matches("1?\\d{10}"), "Can only have 11 digits if number starts with '1'");
 
         this.phone = this.phone.replaceFirst("^1(\\d{10})$", "$1");
     }
