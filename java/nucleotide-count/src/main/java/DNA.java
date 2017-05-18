@@ -24,5 +24,4 @@ public class DNA {
     public Map<Character, Integer> nucleotideCounts() {
         return counting;
     }
-
 }
