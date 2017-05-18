@@ -1,9 +1,9 @@
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import static java.util.Optional.ofNullable;
+import static java.util.stream.Stream.of;
 
 public class DNA {
 
@@ -14,14 +14,11 @@ public class DNA {
                 .collect(Collectors.groupingBy(Function.identity(),
                         Collectors.reducing(0, i -> 1, Integer::sum)));
 
-        Stream.of('A','C','G','T')
-                .filter(e -> !counting.containsKey(e))
-                .forEach(e -> counting.put(e, 0));
+        of('A','C','G','T').forEach(n -> counting.computeIfAbsent(n, i -> 0));
     }
 
     public int count(char n) {
-        return Optional.ofNullable(counting.get(n))
-                .orElseThrow((Supplier<RuntimeException>) IllegalArgumentException::new);
+        return ofNullable(counting.get(n)).orElseThrow(IllegalArgumentException::new);
     }
 
     public Map<Character, Integer> nucleotideCounts() {
