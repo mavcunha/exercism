@@ -2,15 +2,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrimeFactorsCalculator {
-    public List<Long> calculatePrimeFactorsOf(long input) {
-        List<Long> longs = new ArrayList<>();
-        for (long factor = 2; factor <= input; factor++) {
-            if (input % factor == 0) {
-                input = input / factor;
-                longs.add(factor);
-                factor--;
+    public List<Long> calculatePrimeFactorsOf(long number) {
+        List<Long> factors = new ArrayList<>();
+        for (long factor = 2; factor <= (long) Math.sqrt(number); factor++) {
+            while (number % factor == 0) {
+                number /= factor;
+                factors.add(factor);
             }
         }
-        return longs;
+        if (number > 1) {
+            factors.add(number);
+        }
+        return factors;
     }
 }
