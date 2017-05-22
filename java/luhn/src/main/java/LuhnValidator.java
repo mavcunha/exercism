@@ -38,7 +38,6 @@ public class LuhnValidator {
     }
 
     private boolean isInputValid(String number) {
-        return number.matches("^(?:\\s|\\d)+$") &&
-               number.matches(".*(?:\\d.*){2,}");
+        return number.matches("\\s*(\\d\\s*){2,}");
     }
 }
