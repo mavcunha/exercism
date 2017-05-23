@@ -1,7 +1,6 @@
 import org.junit.Test;
-import org.junit.Ignore;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class BobTest {
     private final Bob bob = new Bob();
@@ -15,7 +14,6 @@ public class BobTest {
         );
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void shouting() {
         assertEquals(
@@ -24,7 +22,6 @@ public class BobTest {
         );
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void askingAQuestion() {
         assertEquals(
@@ -33,7 +30,6 @@ public class BobTest {
         );
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void askingANumericQuestion() {
         assertEquals(
@@ -42,7 +38,6 @@ public class BobTest {
         );
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void talkingForcefully() {
         assertEquals(
@@ -51,7 +46,6 @@ public class BobTest {
         );
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void usingAcronymsInRegularSpeech() {
         assertEquals(
@@ -59,7 +53,6 @@ public class BobTest {
         );
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void forcefulQuestions() {
         assertEquals(
@@ -67,7 +60,6 @@ public class BobTest {
         );
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void shoutingNumbers() {
         assertEquals(
@@ -75,7 +67,6 @@ public class BobTest {
         );
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void onlyNumbers() {
         assertEquals(
@@ -83,7 +74,6 @@ public class BobTest {
         );
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void questionWithOnlyNumbers() {
         assertEquals(
@@ -91,7 +81,6 @@ public class BobTest {
         );
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void shoutingWithSpecialCharacters() {
         assertEquals(
@@ -99,15 +88,13 @@ public class BobTest {
         );
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void shoutingWithUmlauts() {
         assertEquals(
-            "Whoa, chill out!", bob.hey("\u00dcML\u00c4\u00dcTS!")
+            "Whoa, chill out!", bob.hey("ÜMLÄÜTS!")
         );
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void calmlySpeakingWithUmlauts() {
         assertEquals(
@@ -115,7 +102,6 @@ public class BobTest {
         );
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void shoutingWithNoExclamationMark() {
         assertEquals(
@@ -123,7 +109,6 @@ public class BobTest {
         );
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void statementContainingQuestionMark() {
         assertEquals(
@@ -131,7 +116,6 @@ public class BobTest {
         );
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void prattlingOn() {
         assertEquals(
@@ -139,7 +123,6 @@ public class BobTest {
         );
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void silence() {
         assertEquals(
@@ -147,7 +130,6 @@ public class BobTest {
         );
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void prolongedSilence() {
         assertEquals(
