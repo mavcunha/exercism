@@ -1,10 +1,12 @@
 public class Bob {
     public String hey(String msg) {
-        if (msg.matches(".*\\b(?!OK)\\p{javaUpperCase}+\\b.*[^.]")) {
+        if (msg.trim().isEmpty()) {
+            return "Fine. Be that way!";
+        } else if (msg.equals(msg.toUpperCase()) && !msg.equals(msg.toLowerCase())) {
             return "Whoa, chill out!";
-        } else if (msg.matches(".*\\?")) {
+        } else if (msg.endsWith("?")) {
             return "Sure.";
         }
-        return msg.trim().isEmpty() ? "Fine. Be that way!" : "Whatever.";
+        return "Whatever.";
     }
 }
