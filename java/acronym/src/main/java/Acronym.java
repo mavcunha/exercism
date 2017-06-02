@@ -3,7 +3,7 @@ import java.util.stream.Collectors;
 
 public class Acronym {
 
-    public static final Pattern WORD_SPLIT = Pattern.compile("(?:\\s|-)");
+    public static final Pattern WORD_SPLIT = Pattern.compile("\\W");
     public static final Pattern CAMEL_CASE_SPLIT = Pattern.compile("(?=[A-Z][a-z]+)");
 
     private final String phrase;
